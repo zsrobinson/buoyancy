@@ -1,12 +1,31 @@
+import { AutoSignOut } from "@/components/auto-sign-out";
+import { NavbarShell } from "@/components/navbar-shell";
 import { ScrollButton } from "@/components/scroll-button";
-import { IconArrowRight, IconFeather, IconHeart } from "@tabler/icons-react";
+import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs/app-beta";
+import { IconArrowRight, IconHeart, IconLogin } from "@tabler/icons-react";
 import Link from "next/link";
 
 export default function Home() {
   return (
     <div className="flex flex-col">
       <div className="flex min-h-screen flex-col border-b border-zinc-800 bg-gradient-to-br from-zinc-950 to-zinc-900">
-        <Navbar />
+        <NavbarShell>
+          <div className="flex items-center gap-4">
+            <SignedIn>
+              <AutoSignOut />
+              <UserButton />
+            </SignedIn>
+            <SignedOut>
+              <Link
+                href="/sign-in"
+                className="flex items-center gap-2 rounded-lg bg-zinc-800 px-4 py-2 text-zinc-300 transition hover:bg-zinc-700/70"
+              >
+                Sign In
+                <IconLogin size={20} />
+              </Link>
+            </SignedOut>
+          </div>
+        </NavbarShell>
 
         <div className="mx-auto flex max-w-6xl grow flex-col items-center justify-between gap-8 p-8">
           <div className="flex flex-col items-center gap-12 pt-8 md:flex-row md:pt-24">
@@ -31,28 +50,6 @@ export default function Home() {
       <div className="flex min-h-screen flex-col">
         <Features />
         <Footer />
-      </div>
-    </div>
-  );
-}
-
-function Navbar() {
-  return (
-    <div className="border-b border-zinc-800 bg-zinc-900/75">
-      <div className="mx-auto flex max-w-6xl justify-between p-4">
-        <div className="flex items-center gap-2">
-          <IconFeather size={28} />
-          <h1 className="text-2xl font-bold">Buoyancy</h1>
-        </div>
-
-        <div className="flex items-center gap-4">
-          <span className="rounded-lg bg-zinc-800 px-3 py-1.5 text-zinc-300">
-            Sign In
-          </span>
-          <span className="rounded-lg bg-zinc-800 px-3 py-1.5 text-zinc-300">
-            Sign Up
-          </span>
-        </div>
       </div>
     </div>
   );
