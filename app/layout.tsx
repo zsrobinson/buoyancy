@@ -11,7 +11,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body className="scroll-smooth bg-zinc-950 text-zinc-50">{children}</body>
     </html>
   );
 }
