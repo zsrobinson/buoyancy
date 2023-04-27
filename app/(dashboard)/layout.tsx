@@ -1,6 +1,6 @@
+import { AutoSignOut } from "@/components/auto-sign-out";
 import { NavbarShell } from "@/components/navbar-shell";
 import { UserButton } from "@clerk/nextjs/app-beta";
-import { AutoSignOut } from "./auto-sign-out";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (

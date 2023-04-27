@@ -1,7 +1,8 @@
+import { AutoSignOut } from "@/components/auto-sign-out";
 import { NavbarShell } from "@/components/navbar-shell";
 import { ScrollButton } from "@/components/scroll-button";
-import { SignedIn, SignedOut } from "@clerk/nextjs/app-beta";
-import { IconArrowRight, IconHeart } from "@tabler/icons-react";
+import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs/app-beta";
+import { IconArrowRight, IconHeart, IconLogin } from "@tabler/icons-react";
 import Link from "next/link";
 
 export default function Home() {
@@ -11,25 +12,16 @@ export default function Home() {
         <NavbarShell>
           <div className="flex items-center gap-4">
             <SignedIn>
-              <Link
-                href="/dashboard"
-                className="rounded-lg bg-zinc-800 px-2 py-1 text-zinc-300"
-              >
-                Dashboard
-              </Link>
+              <AutoSignOut />
+              <UserButton />
             </SignedIn>
             <SignedOut>
               <Link
                 href="/sign-in"
-                className="rounded-lg bg-zinc-800 px-2 py-1 text-zinc-300"
+                className="flex items-center gap-2 rounded-lg bg-zinc-800 px-4 py-2 text-zinc-300 transition hover:bg-zinc-700/70"
               >
                 Sign In
-              </Link>
-              <Link
-                href="/sign-up"
-                className="rounded-lg bg-zinc-800 px-2 py-1 text-zinc-300"
-              >
-                Sign Up
+                <IconLogin size={20} />
               </Link>
             </SignedOut>
           </div>
