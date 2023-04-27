@@ -9,7 +9,7 @@ export default function Home() {
         <Navbar />
 
         <div className="mx-auto flex max-w-6xl grow flex-col items-center justify-between gap-8 p-8">
-          <div className="flex items-center gap-12 pt-24">
+          <div className="flex flex-col items-center gap-12 pt-8 md:flex-row md:pt-24">
             <Description />
             <Definition />
           </div>
@@ -38,7 +38,7 @@ export default function Home() {
 
 function Navbar() {
   return (
-    <div className="border-b border-zinc-800 bg-zinc-900/50">
+    <div className="border-b border-zinc-800 bg-zinc-900/75">
       <div className="mx-auto flex max-w-6xl justify-between p-4">
         <div className="flex items-center gap-2">
           <IconFeather size={28} />
@@ -60,13 +60,13 @@ function Navbar() {
 
 function Description() {
   return (
-    <section className="flex basis-1/2 flex-col gap-4">
+    <section className="flex basis-1/2 flex-col gap-4 text-center md:text-left">
       <span className="text-4xl font-bold">
         Don&apos;t make Self Improvement harder than it has to be.
       </span>
       <span className="text-4xl font-bold">
         Do it with{" "}
-        <span className="bg-gradient-to-br from-cyan-500 to-purple-500 bg-clip-text text-transparent shadow-cyan-800 drop-shadow-[0_0_24px_#818cf8] transition hover:drop-shadow-[0_0_20px_#60a5fa]">
+        <span className="bg-gradient-to-br from-cyan-500 to-purple-500 bg-clip-text text-transparent shadow-cyan-800 drop-shadow-[0_0_24px_#818cf8] transition hover:drop-shadow-[0_0_26px_#60a5fa]">
           Buoyancy.
         </span>
       </span>
@@ -100,7 +100,7 @@ function Features() {
   return (
     <div className="mx-auto flex max-w-6xl grow flex-col items-center justify-center gap-8 p-8">
       <h3 className="text-3xl font-semibold">Why Try Buoyancy?</h3>
-      <section className="grid h-full grid-cols-3 gap-8">
+      <section className="grid h-full grid-cols-1 gap-8 md:grid-cols-3">
         {Array.from(Array(6)).map((_, i) => (
           <div
             key={i}
@@ -122,9 +122,9 @@ function Features() {
 
 function Footer() {
   return (
-    <div className="border-t border-zinc-800 bg-zinc-900/50 text-zinc-300">
-      <div className="mx-auto flex max-w-6xl justify-between p-4">
-        <div className="flex items-center gap-1">
+    <div className="border-t border-zinc-800 bg-zinc-900/75 text-zinc-300">
+      <div className="mx-auto flex max-w-6xl flex-col gap-4 p-4 text-center md:flex-row md:justify-between md:text-left">
+        <div className="flex items-center justify-center gap-1 md:justify-normal">
           Made with <IconHeart size={20} /> by{" "}
           <a
             href="https://zsrobinson.com"
@@ -136,7 +136,7 @@ function Footer() {
           </a>
         </div>
 
-        <div className="flex flex-col items-end">
+        <div className="flex flex-col items-center md:items-end">
           <span className="flex items-center gap-1">
             Visit this project on
             <a
