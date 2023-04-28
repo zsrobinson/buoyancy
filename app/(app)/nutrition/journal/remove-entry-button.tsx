@@ -22,6 +22,7 @@ export function RemoveEntryButton({
         await mutate({ entryId });
         router.refresh();
       }}
+      className="flex items-center"
     >
       <button type="submit">
         <IconX

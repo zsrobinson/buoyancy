@@ -6,13 +6,17 @@ import { zact } from "zact/server";
 import { z } from "zod";
 
 export const createEntry = zact(
-  z.object({ name: z.string().nonempty(), calories: z.number().min(0) })
-)(async ({ name, calories }) => {
+  z.object({
+    name: z.string().nonempty(),
+    calories: z.number().min(0),
+    meal: z.enum(["BREAKFAST", "LUNCH", "DINNER", "SNACK"]),
+  })
+)(async ({ name, calories, meal }) => {
   const user = await currentUser();
   if (!user) throw new Error("Not authenticated.");
 
   return await prisma.nutritionJournalEntry.create({
-    data: { name, calories, userId: user.id },
+    data: { name, calories, userId: user.id, meal },
   });
 });
 

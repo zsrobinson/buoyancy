@@ -17,4 +17,12 @@ model NutritionJournalEntry {
 
   name     String
   calories Int
+  meal     Meal
+}
+
+enum Meal {
+  BREAKFAST
+  LUNCH
+  DINNER
+  SNACK
 }
