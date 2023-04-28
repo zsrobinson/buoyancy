@@ -121,8 +121,10 @@ function SubItem({ text, href }: { text: string; href: string }) {
   return (
     <Link
       href={href}
-      className={`rounded-lg px-2 py-1 text-zinc-400 transition hover:text-zinc-100 ${
-        isActive ? "bg-zinc-800/75 text-zinc-100" : ""
+      className={`rounded-lg px-2 py-1 transition ${
+        isActive
+          ? "bg-zinc-800/75 text-zinc-100"
+          : "text-zinc-400 hover:text-zinc-100"
       }`}
     >
       {text}
