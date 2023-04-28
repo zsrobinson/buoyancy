@@ -1,6 +1,7 @@
 import { AutoSignOut } from "@/components/auto-sign-out";
 import { NavbarShell } from "@/components/navbar-shell";
 import { UserButton } from "@clerk/nextjs/app-beta";
+import { Sidebar } from "./sidebar";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -9,7 +10,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <AutoSignOut />
         <UserButton />
       </NavbarShell>
-      <div className="mx-auto max-w-6xl grow p-4">{children}</div>
+      <div className="flex grow">
+        <Sidebar />
+        <div className="mx-auto max-w-6xl grow p-4">{children}</div>
+      </div>
     </div>
   );
 }
