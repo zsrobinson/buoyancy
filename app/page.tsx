@@ -1,6 +1,5 @@
 import { NavbarShell } from "@/components/navbar-shell";
 import { ScrollButton } from "@/components/scroll-button";
-import { SignedIn, SignedOut } from "@clerk/nextjs/app-beta";
 import { IconArrowRight, IconHeart, IconLogin } from "@tabler/icons-react";
 import Link from "next/link";
 
@@ -10,25 +9,13 @@ export default function Home() {
       <div className="flex min-h-screen flex-col border-b border-zinc-800 bg-gradient-to-br from-zinc-950 to-zinc-900">
         <NavbarShell>
           <div className="flex items-center gap-4">
-            <SignedIn>
-              <Link
-                href="/dashboard"
-                className="flex items-center gap-2 rounded-lg bg-zinc-800 px-3 py-1 text-zinc-300 transition hover:bg-zinc-700/70"
-              >
-                Visit Dashboard
-                <IconLogin size={18} />
-              </Link>
-            </SignedIn>
-
-            <SignedOut>
-              <Link
-                href="/sign-in"
-                className="flex items-center gap-2 rounded-lg bg-zinc-800 px-3 py-1 text-zinc-300 transition hover:bg-zinc-700/70"
-              >
-                Sign In
-                <IconLogin size={18} />
-              </Link>
-            </SignedOut>
+            <Link
+              href="/sign-in"
+              className="flex items-center gap-2 rounded-lg bg-zinc-800 px-3 py-1 text-zinc-300 transition hover:bg-zinc-700/70"
+            >
+              Sign In
+              <IconLogin size={18} />
+            </Link>
           </div>
         </NavbarShell>
 
