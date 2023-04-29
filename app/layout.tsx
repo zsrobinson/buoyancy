@@ -1,5 +1,3 @@
-import { ClerkProvider } from "@clerk/nextjs/app-beta";
-import { dark } from "@clerk/themes";
 import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 
@@ -12,19 +10,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <ClerkProvider
-        appearance={{
-          baseTheme: dark,
-          variables: {
-            colorBackground: "#141418",
-          },
-        }}
-      >
-        <body className="bg-zinc-950 text-zinc-50">
-          {children}
-          <Analytics />
-        </body>
-      </ClerkProvider>
+      <body className="bg-zinc-950 text-zinc-50">
+        {children}
+        <Analytics />
+      </body>
     </html>
   );
 }
