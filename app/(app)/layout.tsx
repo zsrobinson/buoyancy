@@ -14,7 +14,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         </NavbarShell>
         <div className="flex grow">
           <Sidebar />
-          <div className="mx-auto max-w-6xl grow p-4">{children}</div>
+          <div className="mx-auto max-w-6xl grow p-8">{children}</div>
         </div>
       </div>
     </ThemedClerkProvider>

@@ -4,7 +4,7 @@ export default async function Page() {
   const user = await currentUser();
 
   return (
-    <div className="flex w-full flex-col gap-2 p-4">
+    <div className="flex w-full flex-col gap-2">
       <h2 className="text-xl font-bold">Dashboard</h2>
       <p>
         Hey there {user?.firstName}! Your user id is{" "}

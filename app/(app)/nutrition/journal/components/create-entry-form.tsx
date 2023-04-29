@@ -4,7 +4,7 @@ import { Meal } from "@prisma/client";
 import { IconPlus } from "@tabler/icons-react";
 import { useRouter } from "next/navigation";
 import { useZact } from "zact/client";
-import { createEntry } from "./action";
+import { createEntry } from "../action";
 import { useEffect, useRef } from "react";
 
 export function CreateEntryForm({
@@ -41,7 +41,7 @@ export function CreateEntryForm({
           await mutate({ name, calories: Number(calories), meal });
           router.refresh();
         }}
-        className="ml-3 flex items-center gap-3"
+        className="flex items-center gap-2 pl-4"
         ref={formRef}
       >
         <IconPlus size={12} stroke={4} />
