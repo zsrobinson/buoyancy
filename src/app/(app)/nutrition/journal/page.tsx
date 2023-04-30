@@ -1,4 +1,4 @@
-import prisma from "@/lib/prisma";
+import prisma from "~/lib/prisma";
 import { currentUser } from "@clerk/nextjs/app-beta";
 import { Meal } from "@prisma/client";
 import { MealSection } from "./components/meal-section";

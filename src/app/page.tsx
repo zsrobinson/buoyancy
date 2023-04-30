@@ -1,5 +1,5 @@
-import { NavbarShell } from "@/components/navbar-shell";
-import { ScrollButton } from "@/components/scroll-button";
+import { NavbarShell } from "~/components/navbar-shell";
+import { ScrollButton } from "~/components/scroll-button";
 import { IconArrowRight, IconHeart, IconLogin } from "@tabler/icons-react";
 import Link from "next/link";
 

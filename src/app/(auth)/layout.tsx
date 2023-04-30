@@ -1,5 +1,5 @@
-import { NavbarShell } from "@/components/navbar-shell";
-import { ThemedClerkProvider } from "@/components/themed-clerk-provider";
+import { NavbarShell } from "~/components/navbar-shell";
+import { ThemedClerkProvider } from "~/components/themed-clerk-provider";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (

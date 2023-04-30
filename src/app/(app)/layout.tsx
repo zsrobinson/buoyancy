@@ -1,6 +1,6 @@
-import { AutoSignOut } from "@/components/auto-sign-out";
-import { NavbarShell } from "@/components/navbar-shell";
-import { ThemedClerkProvider } from "@/components/themed-clerk-provider";
+import { AutoSignOut } from "~/components/auto-sign-out";
+import { NavbarShell } from "~/components/navbar-shell";
+import { ThemedClerkProvider } from "~/components/themed-clerk-provider";
 import { UserButton } from "@clerk/nextjs/app-beta";
 import { Sidebar } from "./sidebar";
 
