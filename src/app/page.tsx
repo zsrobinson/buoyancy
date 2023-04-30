@@ -7,17 +7,7 @@ export default function Home() {
   return (
     <div className="flex flex-col">
       <div className="flex min-h-screen flex-col border-b border-zinc-800 bg-gradient-to-br from-zinc-950 to-zinc-900">
-        <NavbarShell>
-          <div className="flex items-center gap-4">
-            <Link
-              href="/sign-in"
-              className="flex items-center gap-2 rounded-lg bg-zinc-800 px-3 py-1 text-zinc-300 transition hover:bg-zinc-700/70"
-            >
-              Sign In
-              <IconLogin size={18} />
-            </Link>
-          </div>
-        </NavbarShell>
+        <NavbarShell />
 
         <div className="mx-auto flex max-w-6xl grow flex-col items-center justify-between gap-8 p-8">
           <div className="flex flex-col items-center gap-12 pt-8 md:flex-row md:pt-24">
@@ -25,16 +15,15 @@ export default function Home() {
             <Definition />
           </div>
 
-          <div className="flex flex-col items-center gap-8">
-            <Link
-              href="dashboard"
-              className="group flex max-w-fit gap-2 rounded-lg bg-zinc-50 px-4 py-2 text-zinc-950 transition hover:bg-zinc-200"
-            >
-              Visit Your Dashboard
-              <IconArrowRight className="transition group-hover:translate-x-1" />
-            </Link>
-            <ScrollButton />
-          </div>
+          <Link
+            href="dashboard"
+            className="group flex max-w-fit gap-2 rounded-lg bg-zinc-50 px-4 py-2 text-zinc-950 transition hover:bg-zinc-200"
+          >
+            Visit Your Dashboard
+            <IconArrowRight className="transition group-hover:translate-x-1" />
+          </Link>
+
+          <ScrollButton />
         </div>
       </div>
 

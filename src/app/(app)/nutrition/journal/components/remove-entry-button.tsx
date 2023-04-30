@@ -1,26 +1,22 @@
 "use client";
 
 import { IconX } from "@tabler/icons-react";
-import { useRouter } from "next/navigation";
-import { useZact } from "zact/client";
-import { removeEntry } from "../action";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { removeNutritionJournalEntry } from "~/lib/nutrition";
 
-export function RemoveEntryButton({
-  action,
-  entryId,
-}: {
-  action: typeof removeEntry;
-  entryId: string;
-}) {
-  const { mutate } = useZact(action);
-  const router = useRouter();
+export function RemoveEntryButton({ entryId }: { entryId: string }) {
+  const queryClient = useQueryClient();
+
+  const { mutate } = useMutation({
+    mutationFn: removeNutritionJournalEntry,
+    onSuccess: () => queryClient.invalidateQueries(["nutritionJournalEntries"]),
+  });
 
   return (
     <form
-      onSubmit={async (e) => {
+      onSubmit={(e) => {
         e.preventDefault();
-        await mutate({ entryId });
-        router.refresh();
+        mutate(entryId);
       }}
       className="flex items-center"
     >

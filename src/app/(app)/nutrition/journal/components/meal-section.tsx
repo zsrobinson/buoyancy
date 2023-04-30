@@ -1,11 +1,7 @@
-import { Meal, NutritionJournalEntry } from "@prisma/client";
-import { removeEntry, createEntry } from "../action";
-import { CreateEntryForm } from "./create-entry-form";
-import {
-  RemoveEntryButton,
-  RemoveEntryButtonSkeleton,
-} from "./remove-entry-button";
+import { Meal, NutritionJournalEntry } from "~/lib/nutrition";
 import { IconPointFilled } from "@tabler/icons-react";
+import { CreateEntryForm } from "./create-entry-form";
+import { RemoveEntryButton } from "./remove-entry-button";
 
 export function MealSection({
   meal,
@@ -39,36 +35,13 @@ export function MealSection({
                   {entry.name}, {entry.calories} calories
                 </span>
 
-                <RemoveEntryButton action={removeEntry} entryId={entry.id} />
+                <RemoveEntryButton entryId={entry.id} />
               </div>
             ))}
         </div>
       )}
 
-      <CreateEntryForm action={createEntry} meal={meal} />
-    </div>
-  );
-}
-
-export function MealSectionSkelton({ meal }: { meal: Meal }) {
-  return (
-    <div className="flex flex-col gap-2">
-      <div className="flex items-end gap-2">
-        <h1 className="text-2xl font-bold">
-          {meal.slice(0, 1).toUpperCase() + meal.slice(1).toLowerCase()}
-        </h1>
-        <div className="mb-1.5 h-4 w-20 animate-pulse rounded-lg bg-zinc-900"></div>
-      </div>
-
-      <div className="flex flex-col gap-1 pl-4">
-        {Array.from(Array(2)).map((_, i) => (
-          <div className="flex items-center gap-2" key={i}>
-            <IconPointFilled size={12} />
-            <div className="h-6 w-48 animate-pulse rounded-lg bg-zinc-900"></div>
-            <RemoveEntryButtonSkeleton />
-          </div>
-        ))}
-      </div>
+      <CreateEntryForm meal={meal} />
     </div>
   );
 }

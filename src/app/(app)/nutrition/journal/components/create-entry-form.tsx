@@ -1,35 +1,29 @@
 "use client";
 
-import { Meal } from "@prisma/client";
 import { IconPlus } from "@tabler/icons-react";
-import { useRouter } from "next/navigation";
-import { useZact } from "zact/client";
-import { createEntry } from "../action";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useEffect, useRef } from "react";
+import { Meal, addNutritionJournalEntry } from "~/lib/nutrition";
 
-export function CreateEntryForm({
-  action,
-  meal,
-}: {
-  action: typeof createEntry;
-  meal: Meal;
-}) {
-  const { mutate, data, isLoading, error } = useZact(action);
-  const router = useRouter();
+export function CreateEntryForm({ meal }: { meal: Meal }) {
+  const queryClient = useQueryClient();
+
   const formRef = useRef<HTMLFormElement>(null);
   const nameInputRef = useRef<HTMLInputElement>(null);
 
-  useEffect(() => {
-    if (data && !error) {
-      formRef.current?.reset();
-      nameInputRef.current?.focus();
-    }
-  }, [data, error]);
+  const { mutate, isLoading, isError } = useMutation({
+    mutationFn: addNutritionJournalEntry,
+    onSuccess: () => {
+      queryClient.invalidateQueries(["nutritionJournalEntries"]);
+      if (formRef.current) formRef.current.reset();
+      if (nameInputRef.current) nameInputRef.current.focus();
+    },
+  });
 
   return (
     <>
       <form
-        onSubmit={async (e) => {
+        onSubmit={(e) => {
           e.preventDefault();
 
           const formData = new FormData(e.currentTarget);
@@ -38,8 +32,13 @@ export function CreateEntryForm({
             calories: string;
           };
 
-          await mutate({ name, calories: Number(calories), meal });
-          router.refresh();
+          mutate({
+            id: crypto.randomUUID(),
+            date: new Date().toISOString(),
+            name,
+            meal,
+            calories: Number(calories),
+          });
         }}
         className="flex items-center gap-2 pl-4"
         ref={formRef}
@@ -72,9 +71,9 @@ export function CreateEntryForm({
         </button>
       </form>
 
-      {error && (
+      {isError && (
         <span className="grow-0 text-xs text-red-300">
-          Error creating entry: {error.message}
+          Error creating entry
         </span>
       )}
     </>

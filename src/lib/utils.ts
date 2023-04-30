@@ -1,6 +1,13 @@
-import { ClassValue, clsx } from "clsx"
-import { twMerge } from "tailwind-merge"
- 
+import { ClassValue, clsx } from "clsx";
+import { twMerge } from "tailwind-merge";
+
 export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs))
+  return twMerge(clsx(inputs));
+}
+
+export function toTitleCase(str: string) {
+  return str
+    .split(" ")
+    .map((word) => word[0].toUpperCase() + word.slice(1))
+    .join(" ");
 }

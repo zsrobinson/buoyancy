@@ -1,26 +1,27 @@
-import prisma from "~/lib/prisma";
-import { currentUser } from "@clerk/nextjs/app-beta";
-import { Meal } from "@prisma/client";
+"use client";
+
+import { useQuery } from "@tanstack/react-query";
 import { MealSection } from "./components/meal-section";
+import { getNutritionJournalEntries, meals } from "~/lib/nutrition";
+import { BasicLoadingScreen } from "~/components/basic-loading-screen";
+import { BasicErrorScreen } from "~/components/basic-error-screen";
 
-export default async function Page() {
-  const user = await currentUser();
-  if (!user) throw new Error("Not authenticated.");
-
-  const entries = await prisma.nutritionJournalEntry.findMany({
-    where: { userId: user.id },
-    orderBy: { createdAt: "asc" },
+export default function Page() {
+  const entries = useQuery({
+    queryKey: ["nutritionJournalEntries"],
+    queryFn: getNutritionJournalEntries,
   });
 
-  await new Promise((resolve) => setTimeout(resolve, 3000));
+  if (entries.isLoading) return <BasicLoadingScreen />;
+  if (entries.isError) return <BasicErrorScreen />;
 
   return (
     <div className="flex flex-col gap-4">
-      {Object.values(Meal).map((meal) => (
+      {meals.map((meal) => (
         <MealSection
           key={meal}
           meal={meal}
-          entries={entries.filter((entry) => entry.meal === meal)}
+          entries={entries.data.filter((entry) => entry.meal === meal)}
         />
       ))}
     </div>
