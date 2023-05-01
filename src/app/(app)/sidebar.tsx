@@ -1,19 +1,20 @@
 "use client";
 
 import {
+  IconBaguette,
+  IconMoon,
+  IconRun,
+  IconSettings,
+  IconTable,
+} from "@tabler/icons-react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "~/components/ui/accordion";
-import {
-  IconBaguette,
-  IconMoon,
-  IconRun,
-  IconTable,
-} from "@tabler/icons-react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
 
 export function Sidebar() {
   const pathname = usePathname();
@@ -21,7 +22,8 @@ export function Sidebar() {
     | "dashboard"
     | "nutrition"
     | "fitness"
-    | "sleep";
+    | "sleep"
+    | "settings";
 
   return (
     <div
@@ -37,8 +39,8 @@ export function Sidebar() {
           : ""
       }`}
     >
-      <div className="flex flex-col bg-gradient-to-b from-zinc-900 to-transparent p-4 font-medium">
-        <Link href="/dashboard" className="flex items-center gap-3 pb-2">
+      <div className="flex flex-col gap-2 bg-gradient-to-b from-zinc-900 to-transparent p-4 font-medium">
+        <Link href="/dashboard" className="flex items-center gap-3">
           <div className="rounded-lg bg-blue-950/70 p-2 text-blue-400">
             <IconTable size={20} />
           </div>
@@ -64,10 +66,10 @@ export function Sidebar() {
             <AccordionContent>
               <div className="flex flex-col gap-1 pl-10">
                 <SubItem text="Nutrition Journal" href="/nutrition/journal" />
-                <SubItem text="Food Database" href="/nutrition/database" />
-                <SubItem text="My Foods" href="/nutrition/my-foods" />
-                <SubItem text="My Recipes" href="/nutrition/my-recipes" />
-                <SubItem text="My Meals" href="/nutrition/my-meals" />
+                {/* <SubItem text="Food Database" href="/nutrition/database" /> */}
+                <SubItem text="My Foods" href="/nutrition/foods" />
+                {/* <SubItem text="My Recipes" href="/nutrition/recipes" /> */}
+                <SubItem text="My Meals" href="/nutrition/meals" />
                 <SubItem text="Settings" href="/nutrition/settings" />
               </div>
             </AccordionContent>
@@ -109,6 +111,19 @@ export function Sidebar() {
             </AccordionContent>
           </AccordionItem>
         </Accordion>
+
+        <Link href="/settings" className="flex items-center gap-3">
+          <div className="rounded-lg bg-zinc-700/70 p-2 text-zinc-400">
+            <IconSettings size={20} />
+          </div>
+          <span
+            className={`flex h-full items-center rounded-lg px-2 transition ${
+              tabGroup === "settings" ? "bg-zinc-800/75" : "-translate-x-2"
+            }`}
+          >
+            Settings
+          </span>
+        </Link>
       </div>
     </div>
   );

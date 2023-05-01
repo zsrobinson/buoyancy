@@ -7,13 +7,17 @@ const userSchema = z.object({
 
 export type User = z.infer<typeof userSchema>;
 
-export function getCurrentUser(): User {
+export function getUser(): User {
   const res = localStorage.getItem("user");
 
   if (!res) {
     localStorage.setItem("user", JSON.stringify({ id: crypto.randomUUID() }));
-    return getCurrentUser();
+    return getUser();
   }
 
   return userSchema.parse(JSON.parse(res));
+}
+
+export async function updateUser(user: User) {
+  localStorage.setItem("user", JSON.stringify(user));
 }

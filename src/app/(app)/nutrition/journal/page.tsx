@@ -1,8 +1,8 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import { MealSection } from "./components/meal-section";
-import { getNutritionJournalEntries, meals } from "~/lib/nutrition";
+import { MealSection } from "./meal-section";
+import { getNutritionJournalEntries, meals } from "~/lib/nutrition-journal";
 import { BasicLoadingScreen } from "~/components/basic-loading-screen";
 import { BasicErrorScreen } from "~/components/basic-error-screen";
 

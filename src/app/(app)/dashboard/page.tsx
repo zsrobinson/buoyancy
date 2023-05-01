@@ -1,12 +1,12 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import { getCurrentUser } from "~/lib/user";
+import { getUser } from "~/lib/user";
 
 export default function Page() {
   const user = useQuery({
     queryKey: ["user"],
-    queryFn: getCurrentUser,
+    queryFn: getUser,
   });
 
   if (user.isLoading) return <p>Loading...</p>;

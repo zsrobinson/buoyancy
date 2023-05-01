@@ -1,4 +1,4 @@
-import { Meal, NutritionJournalEntry } from "~/lib/nutrition";
+import { Meal, NutritionJournalEntry } from "~/lib/nutrition-journal";
 import { IconPointFilled } from "@tabler/icons-react";
 import { CreateEntryForm } from "./create-entry-form";
 import { RemoveEntryButton } from "./remove-entry-button";

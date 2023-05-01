@@ -2,7 +2,7 @@
 
 import { IconX } from "@tabler/icons-react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { removeNutritionJournalEntry } from "~/lib/nutrition";
+import { removeNutritionJournalEntry } from "~/lib/nutrition-journal";
 
 export function RemoveEntryButton({ entryId }: { entryId: string }) {
   const queryClient = useQueryClient();

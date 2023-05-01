@@ -2,8 +2,8 @@
 
 import { IconPlus } from "@tabler/icons-react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useEffect, useRef } from "react";
-import { Meal, addNutritionJournalEntry } from "~/lib/nutrition";
+import { useRef } from "react";
+import { Meal, addNutritionJournalEntry } from "~/lib/nutrition-journal";
 
 export function CreateEntryForm({ meal }: { meal: Meal }) {
   const queryClient = useQueryClient();
