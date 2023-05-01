@@ -9,6 +9,7 @@ import {
 } from "@tabler/icons-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 import {
   Accordion,
   AccordionContent,
@@ -18,12 +19,13 @@ import {
 
 export function Sidebar() {
   const pathname = usePathname();
-  const tabGroup = pathname.split("/")[1] as
-    | "dashboard"
-    | "nutrition"
-    | "fitness"
-    | "sleep"
-    | "settings";
+  const [tabGroup, setTabGroup] = useState<
+    "dashboard" | "nutrition" | "fitness" | "sleep" | "settings"
+  >(pathname.split("/")[1] as any);
+
+  useEffect(() => {
+    setTabGroup(pathname.split("/")[1] as any);
+  }, [pathname]);
 
   return (
     <div
@@ -46,7 +48,9 @@ export function Sidebar() {
           </div>
           <span
             className={`flex h-full items-center rounded-lg px-2 transition ${
-              tabGroup === "dashboard" ? "bg-zinc-800/75" : "-translate-x-2"
+              pathname.split("/")[1] === "dashboard"
+                ? "bg-zinc-800/75"
+                : "-translate-x-2"
             }`}
           >
             Dashboard
@@ -55,7 +59,10 @@ export function Sidebar() {
 
         <Accordion type="single" collapsible defaultValue={tabGroup}>
           <AccordionItem value="nutrition" className="border-b-0">
-            <AccordionTrigger className="py-2">
+            <AccordionTrigger
+              className="py-2"
+              onClick={() => setTabGroup("nutrition")}
+            >
               <div className="flex items-center gap-3 pr-12">
                 <div className="rounded-lg bg-emerald-950/70 p-2 text-emerald-400">
                   <IconBaguette size={20} />
@@ -76,7 +83,10 @@ export function Sidebar() {
           </AccordionItem>
 
           <AccordionItem value="fitness" className="border-b-0">
-            <AccordionTrigger className="py-2">
+            <AccordionTrigger
+              className="py-2"
+              onClick={() => setTabGroup("fitness")}
+            >
               <div className="flex items-center gap-3 pr-12">
                 <div className="rounded-lg bg-red-950/70 p-2 text-red-400">
                   <IconRun size={20} />
@@ -95,7 +105,10 @@ export function Sidebar() {
           </AccordionItem>
 
           <AccordionItem value="sleep" className="border-b-0">
-            <AccordionTrigger className="py-2">
+            <AccordionTrigger
+              className="py-2"
+              onClick={() => setTabGroup("sleep")}
+            >
               <div className="flex items-center gap-3 pr-12">
                 <div className="rounded-lg bg-violet-950/70 p-2 text-violet-400">
                   <IconMoon size={20} />
@@ -118,7 +131,9 @@ export function Sidebar() {
           </div>
           <span
             className={`flex h-full items-center rounded-lg px-2 transition ${
-              tabGroup === "settings" ? "bg-zinc-800/75" : "-translate-x-2"
+              pathname.split("/")[1] === "settings"
+                ? "bg-zinc-800/75"
+                : "-translate-x-2"
             }`}
           >
             Settings
