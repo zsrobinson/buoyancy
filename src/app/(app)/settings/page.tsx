@@ -17,7 +17,7 @@ export default function Page() {
   if (user.isError) return <BasicErrorScreen />;
 
   return (
-    <div className="flex flex-col gap-8">
+    <div className="flex max-w-2xl flex-col gap-8">
       <h2 className="text-2xl font-semibold">Settings</h2>
       <div className="flex flex-col gap-4">
         <h3 className="text-xl font-semibold">User Preferences</h3>
