@@ -2,6 +2,7 @@ import { Meal, NutritionJournalEntry } from "~/lib/nutrition-journal";
 import { IconPointFilled } from "@tabler/icons-react";
 import { CreateEntryForm } from "./create-entry-form";
 import { RemoveEntryButton } from "./remove-entry-button";
+import { useAutoAnimate } from "@formkit/auto-animate/react";
 
 export function MealSection({
   meal,
@@ -11,6 +12,7 @@ export function MealSection({
   entries: NutritionJournalEntry[];
 }) {
   const calorieSum = entries.reduce((sum, entry) => sum + entry.calories, 0);
+  const [animateRef] = useAutoAnimate();
 
   return (
     <div className="flex flex-col gap-2">
@@ -23,23 +25,21 @@ export function MealSection({
         </span>
       </div>
 
-      {entries.length > 0 && (
-        <div className="flex flex-col gap-1 pl-4">
-          {entries
-            .filter((entry) => entry.meal === meal)
-            .map((entry) => (
-              <div className="flex items-center gap-2" key={entry.id}>
-                <IconPointFilled size={12} />
+      <div className="flex flex-col gap-1 pl-4" ref={animateRef}>
+        {entries
+          .filter((entry) => entry.meal === meal)
+          .map((entry) => (
+            <div className="flex items-center gap-2" key={entry.id}>
+              <IconPointFilled size={12} />
 
-                <span>
-                  {entry.name}, {entry.calories} calories
-                </span>
+              <span>
+                {entry.name}, {entry.calories} calories
+              </span>
 
-                <RemoveEntryButton entryId={entry.id} />
-              </div>
-            ))}
-        </div>
-      )}
+              <RemoveEntryButton entryId={entry.id} />
+            </div>
+          ))}
+      </div>
 
       <CreateEntryForm meal={meal} />
     </div>

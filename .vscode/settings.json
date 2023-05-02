@@ -1,5 +1,13 @@
 {
   "typescript.tsdk": "node_modules/typescript/lib",
   "typescript.enablePromptUseWorkspaceTsdk": true,
-  "cSpell.words": ["clsx", "datetime", "nextjs", "tabler", "tanstack", "zact"]
+  "cSpell.words": [
+    "clsx",
+    "datetime",
+    "formkit",
+    "nextjs",
+    "tabler",
+    "tanstack",
+    "zact"
+  ]
 }
