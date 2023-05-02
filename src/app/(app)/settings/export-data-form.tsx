@@ -19,13 +19,11 @@ export function ExportDataForm() {
     (key) => key !== "ally-supports-cache"
   );
 
-  const formRef = useRef<HTMLFormElement>(null);
   const [errorMessage, setErrorMessage] = useState("");
 
   return (
     <form
       className="flex flex-col items-start gap-4"
-      ref={formRef}
       onSubmit={(e) => {
         e.preventDefault();
 
@@ -49,44 +47,49 @@ export function ExportDataForm() {
       }}
     >
       <div className="flex flex-col gap-2">
+        <Label>Categories</Label>
         {keys.map((key) => (
           <div className="flex items-center space-x-2" key={key}>
-            <Checkbox id={key} name={key} defaultChecked={true} />
-            <Label htmlFor={key} className="font-normal">
+            <Checkbox id={"export-" + key} name={key} defaultChecked={true} />
+            <Label htmlFor={"export-" + key} className="font-normal">
               {camelCaseToTitleCase(key)}
             </Label>
           </div>
         ))}
       </div>
 
-      <div className="flex gap-4">
-        <Button variant="secondary" type="submit">
-          Export
-        </Button>
-        <Dialog>
-          <DialogTrigger asChild>
-            <Button variant="ghost" type="button">
-              Learn More
-            </Button>
-          </DialogTrigger>
-          <DialogContent>
-            <DialogHeader>
-              <DialogTitle>About Exporting Your Data</DialogTitle>
-            </DialogHeader>
-            <p className="text-zinc-400">
-              Your data is securely stored within your browser&apos;s local
-              storage, which means it is not saved on any external servers. To
-              ensure the safety of your data or transfer it to another device,
-              you can export it as a JSON file. Although your data will remain
-              in local storage even when you close your browser, we recommend
-              creating backups to avoid accidental loss due to clearing the
-              browser cache or local storage. Please note that exporting the
-              data will not delete it from your current device.
-            </p>
-          </DialogContent>
-        </Dialog>
+      <div className="flex flex-col gap-2">
+        <div className="flex gap-4">
+          <Button variant="secondary" type="submit">
+            Export
+          </Button>
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button variant="ghost" type="button">
+                Learn More
+              </Button>
+            </DialogTrigger>
+            <DialogContent>
+              <DialogHeader>
+                <DialogTitle>About Exporting Your Data</DialogTitle>
+              </DialogHeader>
+              <p className="text-zinc-400">
+                Your data is securely stored within your browser&apos;s local
+                storage, which means it is not saved on any external servers. To
+                ensure the safety of your data or transfer it to another device,
+                you can export it as a JSON file. Although your data will remain
+                in local storage even when you close your browser, we recommend
+                creating backups to avoid accidental loss due to clearing the
+                browser cache or local storage. Please note that exporting the
+                data will not delete it from your current device.
+              </p>
+            </DialogContent>
+          </Dialog>
+        </div>
+        {errorMessage && (
+          <p className="text-sm italic text-red-300">{errorMessage}</p>
+        )}
       </div>
-      {errorMessage && <p className="italic text-zinc-500">{errorMessage}</p>}
     </form>
   );
 }

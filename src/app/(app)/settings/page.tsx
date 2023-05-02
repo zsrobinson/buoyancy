@@ -6,6 +6,7 @@ import { BasicLoadingScreen } from "~/components/basic-loading-screen";
 import { getUser } from "~/lib/user";
 import { EditUserForm } from "./edit-user-form";
 import { ExportDataForm } from "./export-data-form";
+import { ImportDataForm } from "./import-data-form";
 
 export default function Page() {
   const user = useQuery({
@@ -27,6 +28,11 @@ export default function Page() {
       <div className="flex flex-col gap-4">
         <h3 className="text-xl font-semibold">Export Data</h3>
         <ExportDataForm />
+      </div>
+
+      <div className="flex flex-col gap-4">
+        <h3 className="text-xl font-semibold">Import Data</h3>
+        <ImportDataForm />
       </div>
     </div>
   );
