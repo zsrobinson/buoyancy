@@ -48,7 +48,7 @@ export function CreateEntryForm({ meal }: { meal: Meal }) {
         <input
           type="text"
           placeholder="Name"
-          className="rounded-lg bg-zinc-800/40 px-3 py-1 placeholder-zinc-500 transition hover:bg-zinc-800/80 focus:border-zinc-200 focus:bg-zinc-800/90 focus:outline-none"
+          className="rounded-md bg-zinc-800/40 px-3 py-1 placeholder-zinc-500 transition hover:bg-zinc-800/80 focus:border-zinc-200 focus:bg-zinc-800/90 focus:outline-none"
           name="name"
           disabled={isLoading}
           ref={nameInputRef}
@@ -57,14 +57,14 @@ export function CreateEntryForm({ meal }: { meal: Meal }) {
         <input
           type="number"
           placeholder="Calories"
-          className="rounded-lg bg-zinc-800/40 px-3 py-1 placeholder-zinc-500 transition hover:bg-zinc-800/80 focus:border-zinc-200 focus:bg-zinc-800/90 focus:outline-none"
+          className="rounded-md bg-zinc-800/40 px-3 py-1 placeholder-zinc-500 transition hover:bg-zinc-800/80 focus:border-zinc-200 focus:bg-zinc-800/90 focus:outline-none"
           name="calories"
           disabled={isLoading}
         />
 
         <button
           type="submit"
-          className="rounded-lg bg-zinc-800/40 px-3 py-1 text-zinc-500 transition hover:bg-zinc-800/80 hover:text-zinc-300 focus:bg-zinc-800/80 focus:outline-none"
+          className="rounded-md bg-zinc-800/40 px-3 py-1 text-zinc-500 transition hover:bg-zinc-800/80 hover:text-zinc-300 focus:bg-zinc-800/80 focus:outline-none"
           disabled={isLoading}
         >
           Add

@@ -43,11 +43,11 @@ export function Sidebar() {
     >
       <div className="flex flex-col gap-2 bg-gradient-to-b from-zinc-900 to-transparent p-4 font-medium">
         <Link href="/dashboard" className="flex items-center gap-3">
-          <div className="rounded-lg bg-blue-950/70 p-2 text-blue-400">
+          <div className="rounded-md bg-blue-950/70 p-2 text-blue-400">
             <IconTable size={20} />
           </div>
           <span
-            className={`flex h-full items-center rounded-lg px-2 transition ${
+            className={`flex h-full items-center rounded-md px-2 transition ${
               pathname.split("/")[1] === "dashboard"
                 ? "bg-zinc-800/75"
                 : "-translate-x-2"
@@ -64,7 +64,7 @@ export function Sidebar() {
               onClick={() => setTabGroup("nutrition")}
             >
               <div className="flex items-center gap-3 pr-12">
-                <div className="rounded-lg bg-emerald-950/70 p-2 text-emerald-400">
+                <div className="rounded-md bg-emerald-950/70 p-2 text-emerald-400">
                   <IconBaguette size={20} />
                 </div>
                 <span className="!no-underline">Nutrition</span>
@@ -88,7 +88,7 @@ export function Sidebar() {
               onClick={() => setTabGroup("fitness")}
             >
               <div className="flex items-center gap-3 pr-12">
-                <div className="rounded-lg bg-red-950/70 p-2 text-red-400">
+                <div className="rounded-md bg-red-950/70 p-2 text-red-400">
                   <IconRun size={20} />
                 </div>
                 <span className="!no-underline">Fitness</span>
@@ -110,7 +110,7 @@ export function Sidebar() {
               onClick={() => setTabGroup("sleep")}
             >
               <div className="flex items-center gap-3 pr-12">
-                <div className="rounded-lg bg-violet-950/70 p-2 text-violet-400">
+                <div className="rounded-md bg-violet-950/70 p-2 text-violet-400">
                   <IconMoon size={20} />
                 </div>
                 <span className="!no-underline">Sleep</span>
@@ -126,11 +126,11 @@ export function Sidebar() {
         </Accordion>
 
         <Link href="/settings" className="flex items-center gap-3">
-          <div className="rounded-lg bg-zinc-700/70 p-2 text-zinc-400">
+          <div className="rounded-md bg-zinc-700/70 p-2 text-zinc-400">
             <IconSettings size={20} />
           </div>
           <span
-            className={`flex h-full items-center rounded-lg px-2 transition ${
+            className={`flex h-full items-center rounded-md px-2 transition ${
               pathname.split("/")[1] === "settings"
                 ? "bg-zinc-800/75"
                 : "-translate-x-2"
@@ -151,7 +151,7 @@ function SubItem({ text, href }: { text: string; href: string }) {
   return (
     <Link
       href={href}
-      className={`rounded-lg px-2 py-1 transition ${
+      className={`rounded-md px-2 py-1 transition ${
         isActive
           ? "bg-zinc-800/75 text-zinc-100"
           : "text-zinc-400 hover:text-zinc-100"
