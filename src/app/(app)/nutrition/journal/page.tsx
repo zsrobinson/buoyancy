@@ -11,6 +11,7 @@ import { Button } from "~/components/ui/button";
 import { IconChevronLeft, IconChevronRight } from "@tabler/icons-react";
 import { addDays, isSameDay } from "date-fns";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
+import { useSearchParams } from "next/navigation";
 
 export default function Page() {
   const entries = useQuery({
@@ -29,7 +30,7 @@ export default function Page() {
   if (entries.isError) return <BasicErrorScreen />;
 
   return (
-    <div className="flex flex-col gap-4" ref={animateRef}>
+    <div className="flex max-w-min flex-col gap-4" ref={animateRef}>
       <div className="flex gap-4">
         <Button
           variant="outline"
