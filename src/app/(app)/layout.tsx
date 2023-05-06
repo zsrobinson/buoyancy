@@ -1,18 +1,14 @@
-"use client";
-
-import { useQuery } from "@tanstack/react-query";
 import { NavbarShell } from "~/components/navbar-shell";
-import { getUser } from "~/lib/user";
 import { Sidebar } from "./sidebar";
-import { IconUser } from "@tabler/icons-react";
-import { Button } from "~/components/ui/button";
-import Link from "next/link";
+import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
+import { AvatarButton } from "./avatar-button";
 
-export default function Layout({ children }: { children: React.ReactNode }) {
-  const user = useQuery({
-    queryKey: ["user"],
-    queryFn: getUser,
-  });
+type LayoutProps = { children: React.ReactNode };
+
+export default async function Layout({ children }: LayoutProps) {
+  const session = await getServerSession();
+  if (!session || !session.user) redirect("/api/auth/signin");
 
   return (
     <div className="flex min-h-screen flex-col bg-gradient-to-br from-zinc-950 to-zinc-900/50">
@@ -20,20 +16,17 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <div className="flex items-center gap-3">
           <div className="flex flex-col items-end justify-center">
             <span className="text-sm font-semibold text-zinc-200">
-              {user.data?.name}
+              {session.user.name}
             </span>
             <span className="font-mono text-xs text-zinc-500">
-              {user.data?.id}
+              {session.user.email}
             </span>
           </div>
 
-          <Button variant="outline" className="px-2" asChild>
-            <Link href="/settings">
-              <IconUser />
-            </Link>
-          </Button>
+          <AvatarButton user={session.user} />
         </div>
       </NavbarShell>
+
       <div className="flex grow">
         <Sidebar />
         <div className="mx-auto max-w-6xl grow p-8 pb-64">{children}</div>

@@ -6,6 +6,7 @@
     "datetime",
     "formkit",
     "nextjs",
+    "signin",
     "tabler",
     "tanstack",
     "zact"
