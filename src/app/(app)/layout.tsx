@@ -1,13 +1,14 @@
-import { NavbarShell } from "~/components/navbar-shell";
-import { Sidebar } from "./sidebar";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
+import { NavbarShell } from "~/components/navbar-shell";
+import { authOptions } from "~/lib/auth";
 import { AvatarButton } from "./avatar-button";
+import { Sidebar } from "./sidebar";
 
 type LayoutProps = { children: React.ReactNode };
 
 export default async function Layout({ children }: LayoutProps) {
-  const session = await getServerSession();
+  const session = await getServerSession(authOptions);
   if (!session || !session.user) redirect("/api/auth/signin");
 
   return (
