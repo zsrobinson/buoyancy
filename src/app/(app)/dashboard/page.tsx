@@ -1,24 +1,15 @@
-"use client";
+import { getCurrentUser } from "~/lib/auth";
 
-import { useQuery } from "@tanstack/react-query";
-import { getUser } from "~/lib/user";
-
-export default function Page() {
-  const user = useQuery({
-    queryKey: ["user"],
-    queryFn: getUser,
-  });
-
-  if (user.isLoading) return <p>Loading...</p>;
-  if (user.isError) return <p>Error</p>;
+export default async function Page() {
+  const user = await getCurrentUser();
 
   return (
     <div className="flex w-full flex-col gap-2">
       <h2 className="text-xl font-bold">Dashboard</h2>
       <p>
-        Hey there{user.data.name ? " " + user.data.name : ""}! Your user id is{" "}
+        Hey there {user.nickName ?? user.name}! Your user id is{" "}
         <span className="rounded-lg bg-zinc-800/75 px-2 py-1 font-mono text-sm text-zinc-300">
-          {user.data.id}
+          {user.id}
         </span>{" "}
         .
       </p>

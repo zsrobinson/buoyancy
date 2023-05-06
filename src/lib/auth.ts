@@ -1,7 +1,8 @@
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
-import { AuthOptions } from "next-auth";
+import { AuthOptions, getServerSession } from "next-auth";
 import GithubProvider from "next-auth/providers/github";
 import { db } from "./db";
+import { redirect } from "next/navigation";
 
 if (!process.env.GITHUB_CLIENT_ID || !process.env.GITHUB_CLIENT_SECRET) {
   throw new Error("Missing environment variables for GitHub OAuth");
@@ -16,3 +17,20 @@ export const authOptions: AuthOptions = {
     }),
   ],
 };
+
+export async function getCurrentUser() {
+  const session = await getServerSession(authOptions);
+  if (!session || !session.user || !session.user.email)
+    redirect("/api/auth/signin");
+
+  const user = await db.user.findUnique({
+    where: { email: session.user.email },
+  });
+
+  if (!user) redirect("/api/auth/signin");
+  return user;
+}
+
+export async function getCurrentSession() {
+  return await getServerSession(authOptions);
+}

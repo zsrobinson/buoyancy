@@ -12,15 +12,12 @@ import {
   DropdownMenuTrigger,
 } from "~/components/ui/dropdown-menu";
 
-export function AvatarButton({ user }: { user: DefaultSession["user"] }) {
+export function AvatarButton({ name, image }: { name: string; image: string }) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
         <Avatar className="h-8 w-8">
-          <AvatarImage
-            src={user?.image ?? undefined}
-            alt={user?.name ?? undefined}
-          />
+          <AvatarImage src={image} alt={name} />
           <AvatarFallback>
             <IconUser />
           </AvatarFallback>

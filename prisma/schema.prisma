@@ -41,13 +41,14 @@ model Session {
 model User {
   id            String    @id @default(cuid())
   name          String?
-  bio           String?   @db.Text
-  age           Int?
   email         String?   @unique
   emailVerified DateTime?
   image         String?
   accounts      Account[]
   sessions      Session[]
+
+  nickName              String?
+  NutritionJournalEntry NutritionJournalEntry[]
 }
 
 model VerificationToken {
@@ -59,3 +60,23 @@ model VerificationToken {
 }
 
 // === End NextAuth Schema ===
+
+model NutritionJournalEntry {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  name     String
+  meal     Meal
+  calories Int
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String
+}
+
+enum Meal {
+  BREAKFAST
+  LUNCH
+  DINNER
+  SNACK
+}

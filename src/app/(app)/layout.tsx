@@ -1,15 +1,13 @@
-import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import { NavbarShell } from "~/components/navbar-shell";
-import { authOptions } from "~/lib/auth";
+import { getCurrentSession, getCurrentUser } from "~/lib/auth";
 import { AvatarButton } from "./avatar-button";
 import { Sidebar } from "./sidebar";
 
 type LayoutProps = { children: React.ReactNode };
 
 export default async function Layout({ children }: LayoutProps) {
-  const session = await getServerSession(authOptions);
-  if (!session || !session.user) redirect("/api/auth/signin");
+  const user = await getCurrentUser();
 
   return (
     <div className="flex min-h-screen flex-col bg-gradient-to-br from-zinc-950 to-zinc-900/50">
@@ -17,14 +15,14 @@ export default async function Layout({ children }: LayoutProps) {
         <div className="flex items-center gap-3">
           <div className="flex flex-col items-end justify-center">
             <span className="text-sm font-semibold text-zinc-200">
-              {session.user.name}
+              {user.name}
             </span>
             <span className="font-mono text-xs text-zinc-500">
-              {session.user.email}
+              {user.email}
             </span>
           </div>
 
-          <AvatarButton user={session.user} />
+          <AvatarButton name={user.name ?? ""} image={user.image ?? ""} />
         </div>
       </NavbarShell>
 
