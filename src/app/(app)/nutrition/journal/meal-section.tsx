@@ -1,11 +1,17 @@
+"use client";
+
 import { useAutoAnimate } from "@formkit/auto-animate/react";
+import { Meal, NutritionJournalEntry } from "@prisma/client";
 import {
   IconCalendarEvent,
   IconDots,
+  IconPlus,
   IconPointFilled,
   IconRotate,
+  IconX,
 } from "@tabler/icons-react";
-import { useState } from "react";
+import { useRef, useState } from "react";
+import { useZact } from "zact/client";
 import { Button } from "~/components/ui/button";
 import {
   Dialog,
@@ -23,18 +29,25 @@ import {
 } from "~/components/ui/dropdown-menu";
 import { Input } from "~/components/ui/input";
 import { Label } from "~/components/ui/label";
-import { Meal, NutritionJournalEntry } from "~/lib/nutrition-journal";
-import { CreateEntryForm } from "./create-entry-form";
-import { RemoveEntryButton } from "./remove-entry-button";
+import { createEntry, deleteEntry } from "./actions";
 
 export function MealSection({
   meal,
   entries,
+  createEntryAction,
+  deleteEntryAction,
 }: {
   meal: Meal;
   entries: NutritionJournalEntry[];
+  createEntryAction: typeof createEntry;
+  deleteEntryAction: typeof deleteEntry;
 }) {
+  const { mutate: createEntryMutation, isLoading: createEntryIsLoading } =
+    useZact(createEntryAction);
+  const { mutate: deleteEntryMutation } = useZact(deleteEntryAction);
+
   const calorieSum = entries.reduce((sum, entry) => sum + entry.calories, 0);
+  const formRef = useRef<HTMLFormElement>(null);
   const [animateRef] = useAutoAnimate();
 
   return (
@@ -52,22 +65,69 @@ export function MealSection({
       </div>
 
       <div className="flex flex-col gap-1 pl-4" ref={animateRef}>
-        {entries
-          .filter((entry) => entry.meal === meal)
-          .map((entry) => (
-            <div className="flex items-center gap-2" key={entry.id}>
-              <IconPointFilled size={12} />
+        {entries.map((entry) => (
+          <div className="flex items-center gap-2" key={entry.id}>
+            <IconPointFilled size={12} />
 
-              <span>
-                {entry.name}, {entry.calories} calories
-              </span>
+            <span>
+              {entry.name}, {entry.calories} calories
+            </span>
 
-              <RemoveEntryButton entryId={entry.id} />
-            </div>
-          ))}
+            <IconX
+              size={16}
+              className="cursor-pointer text-zinc-500 transition hover:text-zinc-300"
+              onClick={() => {
+                deleteEntryMutation({ id: entry.id });
+              }}
+            />
+          </div>
+        ))}
       </div>
 
-      <CreateEntryForm meal={meal} />
+      <form
+        className="flex items-center gap-2 pl-4"
+        onSubmit={async (e) => {
+          e.preventDefault();
+          const fd = new FormData(e.currentTarget);
+          const name = fd.get("name") as string;
+          const calories = parseInt(fd.get("calories") as string);
+
+          await createEntryMutation({
+            name,
+            calories,
+            meal,
+            date: new Date().toISOString(),
+          });
+          formRef.current?.reset();
+        }}
+        ref={formRef}
+      >
+        <IconPlus size={12} stroke={4} />
+
+        <input
+          type="text"
+          placeholder="Name"
+          className="rounded-md bg-zinc-800/40 px-3 py-1 placeholder-zinc-500 transition hover:bg-zinc-800/80 focus:border-zinc-200 focus:bg-zinc-800/90 focus:outline-none"
+          name="name"
+          disabled={createEntryIsLoading}
+        />
+
+        <input
+          type="number"
+          placeholder="Calories"
+          className="rounded-md bg-zinc-800/40 px-3 py-1 placeholder-zinc-500 transition hover:bg-zinc-800/80 focus:border-zinc-200 focus:bg-zinc-800/90 focus:outline-none"
+          name="calories"
+          disabled={createEntryIsLoading}
+        />
+
+        <button
+          type="submit"
+          className="rounded-md bg-zinc-800/40 px-3 py-1 text-zinc-500 transition hover:bg-zinc-800/80 hover:text-zinc-300 focus:bg-zinc-800/80 focus:outline-none"
+          disabled={createEntryIsLoading}
+        >
+          Add
+        </button>
+      </form>
     </div>
   );
 }
