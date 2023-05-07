@@ -1,6 +1,5 @@
-import { redirect } from "next/navigation";
 import { NavbarShell } from "~/components/navbar-shell";
-import { getCurrentSession, getCurrentUser } from "~/lib/auth";
+import { getCurrentUser } from "~/lib/auth";
 import { AvatarButton } from "./avatar-button";
 import { Sidebar } from "./sidebar";
 
